@@ -17,70 +17,81 @@
       }
 
       body {
-        font-family: "Source Sans Pro", sans-serif;
+        font-family: "MADE Dillan", sans-serif;
         width: 100%;
         height: 100%;
         overflow: hidden;
       }
 
-      img#me {
-        position: absolute;
-        bottom: -353px;
+      @keyframes guesswho-frames {
+        0% {
+          bottom: 230px;
       }
-
-      h1#guesswho {
-        position: absolute;
+        50% {
+          bottom: 230px;
+        }
+        75% {
         bottom: -100px;
       }
+        100% {
+          bottom: -100px;
+        }
+      }
 
-      h1#thisguy {
-        position: absolute;
+      @keyframes thisguy-frames {
+        0% {
         bottom: -353px;
+      }
+        75% {
+          bottom: -353px;
+        }
+        100% {
+          bottom: 200px;
+        }
+      }
+
+      @keyframes me-frames {
+        0% {
+          bottom: -353px;
+        }
+        75% {
+          bottom: -353px;
+        }
+        100% {
+          bottom: 0;
+          }
+        }
+
+      .animate {
+        animation-duration: 4s;
+        animation-delay: 0s;
+        animation-iteration-count: 1;
+        animation-fill-mode: both;
+      }
+
+      #guesswho {
+        position: absolute;
+        right: 450px;
+        animation-name: guesswho-frames;
+      }
+
+      #thisguy {
+        position: absolute;
+        right: 450px;
+        animation-name: thisguy-frames;
+          }
+
+      #me {
+        position: absolute;
+        right: 50px;
+        animation-name: me-frames;
       }
     </style>
   </head>
 
   <body>
-    <img src="thisguy.png" id="me" />
-    <h1 id="guesswho">GUESS WHO?</h1>
-    <h1 id="thisguy">THIS GUY.</h1>
-
-    <script>
-      //mmmmmmmmnnnggg
-      function nnng() {
-        var els = pbbt("me", "guesswho", "thisguy");
-
-        function pbbt() {
-          var args = Array.prototype.slice.call(arguments, 0);
-          var out = {};
-          for (var i in args) {
-            out[args[i]] = document.getElementById(args[i]);
-          }
-          return out;
-        }
-
-        els.me.style.right = "50px";
-        els.thisguy.style.right = els.guesswho.style.right = "450px";
-        els.guesswho.style.bottom = "230px";
-
-        setTimeout(function () {
-          els.guesswho.style.bottom = "-100px";
-          setTimeout(function () {
-            els.me.style.bottom = "0";
-            els.thisguy.style.bottom = "200px";
-          }, 1000);
-        }, 1500);
-
-        setTimeout(function () {
-          //do the transition thing
-          var t = "all 1s";
-          for (var k in els) {
-            els[k].style.transition = t;
-          }
-        }, 1);
-      }
-
-      window.onload = nnng;
-    </script>
+    <img class="animate" id="me" src="thisguy.png" />
+    <h1 class="animate" id="guesswho">GUESS WHO?</h1>
+    <h1 class="animate" id="thisguy">THIS GUY.</h1>
   </body>
 </html>
