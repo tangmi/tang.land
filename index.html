@@ -34,6 +34,7 @@
       }
 
       body {
+        margin: 0;
         width: 100%;
         height: 100%;
         overflow: hidden;
@@ -108,6 +109,17 @@
         background-image: url("thisguy.png");
         width: 500px;
         height: 353px;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        body {
+          background-color: #1c1c1e;
+          color: white;
+        }
+
+        #me {
+          background-image: url("thisguy-dark.png");
+        }
       }
     </style>
   </head>
