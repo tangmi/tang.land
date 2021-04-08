@@ -1,3 +1,6 @@
+---
+---
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -14,15 +17,14 @@
         src: url(MADE\ Dillan\ PERSONAL\ USE.otf);
       }
 
+      {% include base.css %}
+
       body,
       html {
         position: fixed;
       }
 
       html {
-        /* Explicitly set white, since some browsers don't include the base CSS. */
-        background-color: white;
-
         /* Make the page unselectable */
         -webkit-touch-callout: none;
         -webkit-user-select: none;
@@ -88,9 +90,6 @@
       }
 
       #guesswho {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-          "Segoe UI Symbol";
         right: 450px;
         animation-name: guesswho-frames;
       }
@@ -112,11 +111,6 @@
       }
 
       @media (prefers-color-scheme: dark) {
-        body {
-          background-color: #1c1c1e;
-          color: white;
-        }
-
         #me {
           background-image: url("thisguy-dark.png");
         }
