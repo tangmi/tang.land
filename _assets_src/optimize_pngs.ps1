@@ -1,4 +1,5 @@
 # & scoop install optipng
+# v0.7.7 is known to work.
 
 # Run this from the repo root.
 Measure-Command {

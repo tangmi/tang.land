@@ -1,6 +1,16 @@
 ---
----
+# Part 1: "GUESS WHO" slides down
+guess_who_delay: 2
+guess_who_duration: 1
 
+# Part 2: "THIS GUY." and my picture slides up
+this_guy_delay: 0
+this_guy_duration: 1
+
+# Part 3: Twinkle twinkles
+twinkle_delay: 0.38
+twinkle_duration: 0.7
+---
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -41,27 +51,32 @@
         height: 100%;
         overflow: hidden;
       }
+      
+      .animate {
+        position: absolute;
+        animation-iteration-count: 1;
+        animation-fill-mode: both;
+      }
 
       @keyframes guesswho-frames {
         0% {
           bottom: 230px;
-        }
-        50% {
-          bottom: 230px;
-        }
-        75% {
-          bottom: -100px;
         }
         100% {
           bottom: -100px;
         }
       }
 
+      #guesswho {
+        animation-name: guesswho-frames;
+        animation-delay: {{ page.guess_who_delay }}s;
+        animation-duration: {{ page.guess_who_duration }}s;
+
+        right: 450px;
+      }
+
       @keyframes thisguy-frames {
         0% {
-          bottom: -353px;
-        }
-        75% {
           bottom: -353px;
         }
         100% {
@@ -69,11 +84,17 @@
         }
       }
 
+      #thisguy {
+        animation-name: thisguy-frames;
+        animation-delay: {{ page.guess_who_delay | plus: page.guess_who_duration | plus: page.this_guy_delay }}s;
+        animation-duration: {{ page.this_guy_duration }}s;
+
+        font-family: "MADE Dillan", sans-serif;
+        right: 450px;
+      }
+
       @keyframes me-frames {
         0% {
-          bottom: -353px;
-        }
-        75% {
           bottom: -353px;
         }
         100% {
@@ -81,38 +102,62 @@
         }
       }
 
-      .animate {
-        position: absolute;
-        animation-duration: 4s;
-        animation-delay: 0s;
-        animation-iteration-count: 1;
-        animation-fill-mode: both;
-      }
-
-      #guesswho {
-        right: 450px;
-        animation-name: guesswho-frames;
-      }
-
-      #thisguy {
-        font-family: "MADE Dillan", sans-serif;
-        right: 450px;
-        animation-name: thisguy-frames;
-      }
-
       #me {
-        right: 50px;
         animation-name: me-frames;
+        animation-delay: {{ page.guess_who_delay | plus: page.guess_who_duration | plus: page.this_guy_delay }}s;
+        animation-duration: {{ page.this_guy_duration }}s;
 
-        /* Use a background image so the image isn't easily drag and droppable. */
+        /* Use a CSS background image so the image isn't easily drag and droppable. */
         background-image: url("thisguy.png");
         width: 500px;
         height: 353px;
+
+        right: 50px;
       }
 
       @media (prefers-color-scheme: dark) {
         #me {
           background-image: url("thisguy-dark.png");
+        }
+      }
+
+      @keyframes twinkle-frames {
+        0% {
+          opacity: 0;
+          transform: rotate(55deg) scale(0);
+        }
+        50% {
+          opacity: 0.5;
+          transform: rotate(55deg) scale(2);
+        }
+        100% {
+          opacity: 0;
+          transform: rotate(55deg) scale(0);
+        }
+      }
+
+      #twinkle {
+        animation-name: twinkle-frames;
+        animation-delay: {{ page.guess_who_delay | plus: page.guess_who_duration | plus: page.this_guy_delay | plus: page.this_guy_duration | plus: page.twinkle_delay }}s;
+        animation-duration: {{ page.twinkle_duration }}s;
+        animation-timing-function: linear;
+
+        /* A 16x16 "X" with pointed tips in each corner */
+        clip-path: polygon(0 0, 43% 50%, 0 100%, 50% 57%, 100% 100%, 57% 50%, 100% 0, 50% 43%);
+        width: 16px;
+        height: 16px;
+        background-color: white;
+
+        /* Placed on the top left of the "T" of "THIS GUY." */
+        bottom: 250px;
+        right: 610px;
+      }
+
+      @media (prefers-color-scheme: light) {
+        /* Placed on the corner of the glasses on my left, because white-on-white is hard to see. */
+        #twinkle {
+          bottom: 252px;
+          right: 245px;
         }
       }
     </style>
@@ -122,5 +167,6 @@
     <div class="animate" id="me"></div>
     <h1 class="animate" id="guesswho">GUESS WHO?</h1>
     <h1 class="animate" id="thisguy">THIS GUY.</h1>
+    <div class="animate" id="twinkle"></div>
   </body>
 </html>
